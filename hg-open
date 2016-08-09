@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [ ! -d ".hg" ]; then
+  echo "Not a hg repository."
+  exit 1
+fi
+
+echo "valid repository"
