@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# TODO get current branch
+
 set -e
 
 # are we in a mercurial repo?
@@ -9,9 +11,11 @@ if [ ! -d ".hg" ]; then
 fi
 
 # get remote
+# TODO allow users to choose the remote
 remote=$(hg paths default)
 
 # set remote url
+# TODO handle all available services (githubn, bitbucket,...)
 if [ ${remote:0:3} = 'ssh' ]; then
     url="https://bitbucket.org/${remote##*org}"
 fi
