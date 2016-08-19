@@ -15,7 +15,7 @@ fi
 remote=$(hg paths default)
 
 # set remote url
-# TODO handle all available services (githubn, bitbucket,...)
+# TODO handle all available services (github, bitbucket,...)
 if [ ${remote:0:3} = 'ssh' ]; then
     url="https://bitbucket.org/${remote##*org}"
 fi
