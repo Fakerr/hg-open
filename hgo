@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
-# TODO get current branch
 
 set -e
 
 # are we in a mercurial repo?
 if [ ! -d ".hg" ]; then
-  echo "Not a mercurial repository."
+  echo "abort: not a mercurial repository." 1>&2
   exit 1
 fi
 
