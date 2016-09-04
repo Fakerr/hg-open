@@ -19,6 +19,17 @@ if [ ${remote:0:3} = 'ssh' ] || [ ${remote:0:5} = 'https' ]; then
     url="https://bitbucket.org/${remote##*org}"
 fi
 
+# open current branch
+if [ -n "$1" ]; then
+  if [ "$1" = '-b' ]; then
+    branch=$(hg branch)
+    url+="/branch/$branch"
+  else
+    echo "abort: unknown argument" 1>&2
+    exit 1
+  fi
+fi
+
 # get current open browser command
 case $( uname -s ) in
   Darwin)  open=open;;
