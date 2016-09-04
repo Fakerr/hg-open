@@ -10,7 +10,7 @@ if [ ! -d ".hg" ]; then
   exit 1
 fi
 
-# get remote
+# get remote (default remote)
 # TODO allow users to choose the remote
 remote=$(hg paths default)
 
