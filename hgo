@@ -16,7 +16,7 @@ remote=$(hg paths default)
 # set remote url
 # TODO handle all available services (github, bitbucket,...)
 if [ ${remote:0:3} = 'ssh' ] || [ ${remote:0:5} = 'https' ]; then
-    url="https://bitbucket.org/${remote##*org}"
+    url="https://bitbucket.org/${remote##*org\/}"
 fi
 
 # open current branch
