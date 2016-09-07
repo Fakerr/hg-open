@@ -19,7 +19,7 @@ if [ ${remote:0:3} = 'ssh' ] || [ ${remote:0:5} = 'https' ]; then
     url="https://bitbucket.org/${remote##*org\/}"
 fi
 
-# open current branch
+# open according arguments
 if [ -n "$1" ]; then
   if [[ "$1" = '-b' ]]; then
     branch=$(hg branch)
