@@ -21,9 +21,11 @@ fi
 
 # open current branch
 if [ -n "$1" ]; then
-  if [ "$1" = '-b' ]; then
+  if [[ "$1" = '-b' ]]; then
     branch=$(hg branch)
     url+="/branch/$branch"
+  elif [[ "$1" = '-c' ]]; then
+    url+="/commits/all"
   else
     echo "abort: unknown argument" 1>&2
     exit 1
