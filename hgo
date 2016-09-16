@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-
 set -e
 
 version="0.0.1"
-BRANCH=false
 COMMIT=false
+BRANCH=""
 DIRECTORY=""
 
 # parse options
@@ -20,12 +19,18 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
       shift;
       ;;
     -b | --branch )
-      BRANCH=true
-      COMMIT=false
+      if [[ -n "$2" ]] && [[ ! "$2" =~ ^- ]]; then
+        BRANCH="$2"
+        COMMIT=false
+        shift;
+      else
+        BRANCH=$(hg branch)
+        COMMIT=false
+      fi
       ;;
     -c | --commit )
       COMMIT=true
-      BRANCH=false
+      BRANCH=""
       ;;
     * )
       echo "abort: unknown argument" 1>&2
@@ -58,9 +63,8 @@ if [ ${remote:0:3} = 'ssh' ] || [ ${remote:0:5} = 'https' ]; then
 fi
 
 # open according arguments
-if [[ $BRANCH = true ]]; then
-  branch=$(hg branch)
-  url+="/branch/$branch"
+if [[ -n $BRANCH ]]; then
+  url+="/branch/$BRANCH"
 elif [[ $COMMIT = true ]]; then
   url+="/commits/all"
 fi
