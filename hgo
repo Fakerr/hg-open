@@ -3,6 +3,45 @@
 
 set -e
 
+version="0.0.1"
+BRANCH=false
+COMMIT=false
+DIRECTORY=""
+
+# parse options
+# while [[ $# -gt 0 && ! "$1" == "--" ]]; do
+while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
+  case $1 in
+    -v | --version )
+      echo $version
+      exit
+      ;;
+    -d | --directory )
+      DIRECTORY="$2"
+      shift;
+      ;;
+    -b | --branch )
+      BRANCH=true
+      COMMIT=false
+      ;;
+    -c | --commit )
+      COMMIT=true
+      BRANCH=false
+      ;;
+    * )
+      echo "abort: unknown argument" 1>&2
+      exit 1
+  esac
+  shift
+done
+if [[ "$1" == "--" ]]; then shift; fi
+
+
+# go under the selected directory
+if [ -n "$DIRECTORY" ]; then
+  cd $DIRECTORY &> /dev/null
+fi
+
 # are we in a mercurial repo?
 if [ ! -d ".hg" ]; then
   echo "abort: not a mercurial repository." 1>&2
@@ -14,22 +53,17 @@ fi
 remote=$(hg paths default)
 
 # set remote url
-# TODO handle all available services (github, bitbucket,...)
+# TODO handle all available services
 if [ ${remote:0:3} = 'ssh' ] || [ ${remote:0:5} = 'https' ]; then
     url="https://bitbucket.org/${remote##*org\/}"
 fi
 
 # open according arguments
-if [ -n "$1" ]; then
-  if [[ "$1" = '-b' ]]; then
-    branch=$(hg branch)
-    url+="/branch/$branch"
-  elif [[ "$1" = '-c' ]]; then
-    url+="/commits/all"
-  else
-    echo "abort: unknown argument" 1>&2
-    exit 1
-  fi
+if [[ $BRANCH = true ]]; then
+  branch=$(hg branch)
+  url+="/branch/$branch"
+elif [[ $COMMIT = true ]]; then
+  url+="/commits/all"
 fi
 
 # get current open browser command
