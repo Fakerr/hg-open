@@ -9,7 +9,6 @@ COMMIT=false
 DIRECTORY=""
 
 # parse options
-# while [[ $# -gt 0 && ! "$1" == "--" ]]; do
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
   case $1 in
     -v | --version )
