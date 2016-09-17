@@ -1,6 +1,22 @@
 #!/usr/bin/env bash
 
+# This script will open your project's page on bitbucket.com
+
 set -e
+
+# usage info
+usage() {
+  cat <<EOF
+  Usage: hgo [options]
+  Options:
+    -d, --directory         Add directory to open.
+    -b, --branch            Search for current/specific(passed as argument) branch.
+    -c, --commit            Open commits' page.
+    -v, --version           Output version
+    -h, --help              This message.
+    --                      End of options
+EOF
+}
 
 version="0.0.1"
 COMMIT=false
@@ -31,6 +47,10 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
     -c | --commit )
       COMMIT=true
       BRANCH=""
+      ;;
+    -h | --help )
+      usage
+      exit
       ;;
     * )
       echo "abort: unknown argument" 1>&2
