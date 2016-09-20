@@ -12,6 +12,7 @@ usage() {
     -d, --directory         Add directory to open.
     -b, --branch            Search for current/specific(passed as argument) branch.
     -c, --commit            Open commits' page.
+    -p, --pr                Open PRs' page.
     -v, --version           Output version
     -h, --help              This message.
     --                      End of options
