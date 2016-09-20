@@ -20,6 +20,7 @@ EOF
 
 version="0.0.1"
 COMMIT=false
+PR=false
 BRANCH=""
 DIRECTORY=""
 
@@ -37,16 +38,16 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
     -b | --branch )
       if [[ -n "$2" ]] && [[ ! "$2" =~ ^- ]]; then
         BRANCH="$2"
-        COMMIT=false
         shift;
       else
         BRANCH=$(hg branch)
-        COMMIT=false
       fi
       ;;
     -c | --commit )
       COMMIT=true
-      BRANCH=""
+      ;;
+    -p | --pull )
+      PR=true
       ;;
     -h | --help )
       usage
@@ -87,6 +88,8 @@ if [[ -n $BRANCH ]]; then
   url+="/branch/$BRANCH"
 elif [[ $COMMIT = true ]]; then
   url+="/commits/all"
+elif [[ $PR = true ]]; then
+  url+="/pull-requests/"
 fi
 
 # get current open browser command
