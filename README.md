@@ -11,6 +11,7 @@ Options:
   -b, --branch --------> Open the current or a specific(passed as argument) branch.  
   -c, --commit --------> Open commits' page.  
   -p, --pr ------------> Open PRs' page.  
+  -s, --source --------> Open Sources' page.  
   -v, --version -------> Output version.  
   -h, --help ----------> This message.  
   -- End of options.
