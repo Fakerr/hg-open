@@ -13,6 +13,7 @@ usage() {
     -b, --branch            Search for current/specific(passed as argument) branch.
     -c, --commit            Open commits' page.
     -p, --pr                Open PRs' page.
+    -s, --source            Open Sources' page.
     -v, --version           Output version
     -h, --help              This message.
     --                      End of options
@@ -21,6 +22,7 @@ EOF
 
 version="0.0.1"
 COMMIT=false
+SOURCE=false
 PR=false
 BRANCH=""
 DIRECTORY=""
@@ -49,6 +51,9 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
       ;;
     -p | --pull )
       PR=true
+      ;;
+    -s | --source )
+      SOURCE=true
       ;;
     -h | --help )
       usage
@@ -91,6 +96,8 @@ elif [[ $COMMIT = true ]]; then
   url+="/commits/all"
 elif [[ $PR = true ]]; then
   url+="/pull-requests/"
+elif [[ $SOURCE = true ]]; then
+  url+="/src/"
 fi
 
 # get current open browser command
