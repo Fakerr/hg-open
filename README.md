@@ -1,6 +1,6 @@
 
 # hg-open
-Open your mercurial project from your terminal
+Open your mercurial project from your terminal (inspired by [https://github.com/paulirish/git-open](https://github.com/paulirish/git-open))
 
 
 This script will open your project's page on bitbucket.com
