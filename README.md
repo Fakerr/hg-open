@@ -10,9 +10,9 @@ Usage: hgo [options]
 Options:  
   -d, --directory        Add directory to open(otherwise, open the current directory).  
   -b, --branch           Open the current or a specific(passed as argument) branch.  
-  -c, --commit           Open commits\' page.  
-  -p, --pr               Open PRs\' page.  
-  -s, --source           Open Sources\' page.  
+  -c, --commit           Open commits page.  
+  -p, --pr               Open PRs page.  
+  -s, --source           Open Sources page.  
   -v, --version          Output version.  
   -h, --help             This message.  
   -- End of options.
